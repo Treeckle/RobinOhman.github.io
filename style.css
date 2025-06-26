@@ -191,6 +191,16 @@ img.big{
 	padding: 0px;
 	border: 2px solid black;
 }
+img.medium{
+	
+	max-width: 25;
+	max-height: 25;
+	margin: auto;
+	width: auto;
+	height: auto;
+	padding: 0px;
+	border: 2px solid black;
+}
 img.portrait{
 	max-width: 50vw;
 	max-height: 50vh;
