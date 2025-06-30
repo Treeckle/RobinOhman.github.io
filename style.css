@@ -193,8 +193,9 @@ img.big{
 }
 img.medium{
 	
-	max-width: 25;
-	max-height: 25;
+	max-width: 50%;
+	min-width: 25vw;
+	max-height: 100vh;
 	margin: auto;
 	width: auto;
 	height: auto;
@@ -264,16 +265,35 @@ a:hover{
 	margin-bottom: 10px;
 	border-radius: 2px;
 	background-color: #26084a;
+}
+.hiddendivider{
+	width: 95%;
+	padding: 2px;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 2px;
+}
+iframe{
+	padding: 2px;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 2px;
+	background-color: black;
 	
 }
 .desc{
 	vertical-align: top;
 	text-align: left;
-	min-width: 300px;
-	max-width: 600px;
-	margin-top: 20px;
+	min-width: 30%;
+	max-width: 60%;
+	margin: 20px;
 	overflow: no-overflow;
 	padding: 20px;
+	line-height: 30px;
+	background-color: #26084a;
+	border-radius: 20px;
 }
 .icon{
 	display: flex;

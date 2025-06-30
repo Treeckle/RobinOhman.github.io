@@ -21,62 +21,88 @@
 		<section class="first">
 		<div class="contentholder">
 			<div class="about">
-					<h2>Warmer Together</h2>
-					
-			
-			<div class="divider"></div>
-				<p class="display">
-					April - June, 2025<br>
-					9 weeks<br>
-					Unreal Engine, Jetbrains Rider<br>
-					Group size: 9<br>
-					School Assignment<br>
-				</p>
+				<h2>Warmer Together</h2>
+				<div class="divider"></div>
+					<iframe width="800" height="370" src="https://www.youtube.com/embed/dxklg2R5AZk?si=uhnieSwx7uqv_Bb1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+					<div class="hiddendivider"></div>
+					<p class="display">
+						April - June, 2025<br>
+						9 weeks<br>
+						Unreal Engine, Jetbrains Rider<br>
+						Group size: 9<br>
+						School Assignment<br>
+					</p>
+					<div class="hiddendivider"></div>
 				<div class="divider"></div>
 			</div>
 			<div class="about">
+				<p class="display">
+					Warmer Together is a 2 player co-op where players need to work together in order to climb a mountain.<br>
+					<br>
+					The main focus of the game is on teamwork, but it also features platforming and puzzles.<br>
+					<br>
+					My contributions to the project were primarily game mechanics, but I was also responsible for getting the animations into the game.
+				</p>
+			</div>
+			<div class="divider"></div>
+			<h3>My contributions</h3>
+			<div class="hiddendivider"></div>
+			<h4>Lifting</h4>
+			<div class="about">
 				<div class="banner">
+					<img class="medium" src="images/LiftCode1.png">
+					<p class="imagetext">
+						Simple logic for lifting
+					</p>
+				</div>
+				<div class="banner">
+	
 					<img class="medium" src="images/Lift.png">
 					<p class="imagetext">
 						Player 1 holding Player 2
 					</p>
 				</div>
 				<p class="desc">
-					Our game features puzzles that require interaction with both in game objects and the other player, both through pushing and lifting objects.
-					To accomplish this, I created a Class called Grabcomponent.
-				</p>
-			</div>
-			<div class="divider"></div>
-			<div class="about">
-			
-			<div class="desc">
-				<p class="display">
-
-				</p>
-			</div>
-			<div class="banner">
-			<img class="big" src="images/texturemanager.png">
-			<p class="display">
-		
-			</p>
-			</div>
-			
-			</div>
-			<div class="divider"></div>
-			<div class="about">
-			<div class="banner">
-				<img class="big" src="images/input.png">
-				<p class="display">
-
-				</p>
-			</div>
-					<div class="desc">
-						<p class="display">
-
-						<br>
-						</p>
-					</div>
+					My primary work was based around the usage of physics within Unreal Engine.<br>
+					Our game features two mechanics that that make use the existing PhysicsHandle component within Unreal Engine. 
+					The first mechanic is the ability to lift the other player. While it was originally possible to lift other objects as well,
+					due to player habits of wanting to carry objects with them to other parts of the level, it was reworked to only allow for the smaller character to be picked up for now.<br>
+					<br>
+					This class is a subclass of a different class I created, which simply holds the logic for grabbing an object using a PhysicsHandle and releasing the object. It also features two empty virtual methods that are
+					called within the respective Grab and Release functions, which are used in the child classes to trigger effects upon performing respective action.<br>
+					<br>
+					Lifting works by using the PhysicsHandles built in function, GrabComponentAtLocation in combination with a trace that checks if the object is in front of the player.
+					When the PhysicsHandle has grabbed the object, it can easily be manipulated and moved around. While the PhysicsHandle technically wouldn't be required at all when only interacting with
+					the other player character, it is necessary for being able to launch actors that do not inherit from the Character class.
+					The reason why the ability to launch the object is necessary is because of the throwing mechanic, which allows the player to throw its held object.<br>
+					<br>
 					
+				</p>
+				
+			</div>
+			<div class="divider"></div>
+			<div class="hiddendivider"></div>
+			<h4>Pushing</h4>
+			<div class="about">
+				<div class="banner">
+					<img class="medium" src="images/PushCode1.png">
+					<p class="imagetext">
+						Simple logic for interacting with object
+					</p>
+				</div>
+				<div class="banner">
+					<img class="medium" src="images/PushCode2.png">
+					<p class="imagetext">
+						Logic held by pushable objects
+					</p>
+				</div>
+				<p class="desc">
+				The second mechanic that makes use of the PhysicsHandle is the pushing mechanic.<br>
+				While it's possible to push around objects within Unreal Engine by default, our game desired for it to be more restrictive in nature,
+				which is why I made the pushing component.
+					
+				</p>
+				
 			</div>
 			<div class="divider"></div>
 			<div class="about">
