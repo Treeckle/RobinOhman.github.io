@@ -97,9 +97,19 @@
 					</p>
 				</div>
 				<p class="desc">
-				The second mechanic that makes use of the PhysicsHandle is the pushing mechanic.<br>
-				While it's possible to push around objects within Unreal Engine by default, our game desired for it to be more restrictive in nature,
-				which is why I made the pushing component.
+					The second mechanic that makes use of the PhysicsHandle is the pushing mechanic.<br>
+					While it's possible to push around objects within Unreal Engine by default through physics collisions, our game desired for it to be more restrictive in nature,
+					which is why I made the pushing component.<br>
+					<br>
+					It's a subclass of GrabComponent, and uses its logic for grabbing and releasing.<br>
+					Most of the action is performed within the TickComponent, where all checks are performed to see if the object can be pushed, before updating the objects location.<br>
+					MaintainRelativeLocation ensures that the player isn't too far away, while UpdateGrabLocation refreshes where the component is grabbed to prevent it from snapping.
+					<div class="banner">
+						<img class="medium" src="images/PushCode3.png">
+						<p class="imagetext">
+							Pushing logic
+						</p>
+					</div>
 					
 				</p>
 				
