@@ -47,7 +47,7 @@
 			<div class="divider"></div>
 			<h3>My contributions</h3>
 			<div class="hiddendivider"></div>
-			<h4>Lifting</h4>
+			<h5>Lifting</h5>
 			<div class="about">
 				<div class="banner">
 					<img class="medium" src="images/LiftCode1.png">
@@ -62,6 +62,7 @@
 						Player 1 holding Player 2
 					</p>
 				</div>
+				<div class="hiddendivider"></div>
 				<p class="desc">
 					My primary work was based around the usage of physics within Unreal Engine.<br>
 					Our game features two mechanics that that make use the existing PhysicsHandle component within Unreal Engine. 
@@ -81,8 +82,7 @@
 				
 			</div>
 			<div class="divider"></div>
-			<div class="hiddendivider"></div>
-			<h4>Pushing</h4>
+			<h5>Pushing</h5>
 			<div class="about">
 				<div class="banner">
 					<img class="medium" src="images/PushCode1.png">
@@ -96,40 +96,146 @@
 						Logic held by pushable objects
 					</p>
 				</div>
+				<div class="hiddendivider"></div>
 				<p class="desc">
 					The second mechanic that makes use of the PhysicsHandle is the pushing mechanic.<br>
 					While it's possible to push around objects within Unreal Engine by default through physics collisions, our game desired for it to be more restrictive in nature,
 					which is why I made the pushing component.<br>
 					<br>
 					It's a subclass of GrabComponent, and uses its logic for grabbing and releasing.<br>
-					Most of the action is performed within the TickComponent, where all checks are performed to see if the object can be pushed, before updating the objects location.<br>
-					MaintainRelativeLocation ensures that the player isn't too far away, while UpdateGrabLocation refreshes where the component is grabbed to prevent it from snapping.
+					Most of the action is performed within the TickComponent, where all checks are performed to see if the object can be pushed, before updating the objects location. And thanks to the PhysicsHandle, the object can easily me moved using SetTargetLocation, which smoothly moves it without violating collisions.<br>
+					MaintainRelativeLocation ensures that the player isn't too far away, while UpdateGrabLocation refreshes where the component is grabbed to prevent it from snapping when one player lets go of it when both are holding it.
+					The reason it needs to be updated is that the grabbed object calculates the normal between all of it's grabbers in order to provide said grabbers with the same position, in order to prevent each players own PhysicsHandle from having to fight with each other.<br>
+					<br>
+					This mechanic could most likely also have been made without using a PhysicsHandle, which also would have most likely simplified some of the logic when it came to multiple players grabbing the same object. I plan on looking into this and experimenting with it in the future.<br>
+					<br>
+				</p>
+				<div class="hiddendivider"></div>
 					<div class="banner">
 						<img class="medium" src="images/PushCode3.png">
 						<p class="imagetext">
 							Pushing logic
 						</p>
 					</div>
-					
-				</p>
 				
 			</div>
 			<div class="divider"></div>
+			<h5>Minigame</h5>
 			<div class="about">
+				<div class="banner">
+					<img class="medium" src="images/Minigame.gif">
+					<p class="imagetext">
+						Minigame gameplay
+					</p>
+				</div>
+				<div class="hiddendivider"></div>
+				<p class="desc">
+					Another mechanic I made was the minigame that is played near the end of the game.<br>
+					It's a cooperative mechanic meant to force the players to communicate with each other in order to pass it, which it does by having them press the buttons at the same time.<br>
+					Input is based around a timer, that resets the input when the input window has passed. <br>
+				</p>
+				<div class="hiddendivider"></div>
+					<div class="banner">
+						<img class="medium" src="images/MinigameCode1.png">
+						<p class="imagetext">
+							Minigame loop
+						</p>
+					</div>
+					<div class="hiddendivider"></div>
+					<p class="desc">
+					Each player has their own instance of the game, which is managed by another actor inside of the game. This actor keeps track of the state of both minigame instances, and keeps track of the score that has been achieved.
+					When both players have pressed the correct button within the timeframe, one point is awarded and the requested inputs are randomly updated.<br>
+					This manager also ensures that both players quit out of the minigame correctly, before triggering the cutscene at the end. While it's only capable of triggering the victory cutscene at the moment, it's fully possible to implement an interface that it can call instead on any desired object,
+					to trigger an event when the minigame is completed.<br>
+					<br>
+					One flaw of the current minigame is that it's possible to mash the button to completely ignore having to time it with the other player, since the timing will likely match up since there is no cooldown between presses.
+					I've been thinking about ways to work around this, which include switching the button every time a press is incorrect, or introducing a cooldown between pressing the button. I personally feel that these solutions are lackluster however.<br>
+					I would like something that should still be fun, which is why I will have to continue to iterate on it.
+					</p>
+			</div>
 			
-				<div class="desc">
-					<p class="display">
-							
+			<div class="divider"></div>
+			<h5>Customization</h5>
+			<div class="about">
+				<div class="banner">
+					<img class="medium" src="images/CustomizationCode1.png">
+					<p class="imagetext">
+						Logic of the customization
+					</p>
+				</div>
+				<div class="hiddendivider"></div>
+				<p class="desc">
+					I created the customization component for usage in the customization menu, due to the one responsible for the menu not having the time to do it. It can be placed on any actor that possesses a SkeletonMeshComponent,
+					and allows for the texture to easily be swapped with any other texture that has been placed within the component on the blueprint.<br> 
+					It has one function to set to a specific texture right away, and two other functions to iterate through the textures within the array.<br>
+					<br>
+					It lacks any failsafes due to the fact that it's only intended for usage on 4 specific blueprints, but can be easily implemented if required.
+				</p>
+			</div>
+			<div class="divider"></div>
+			<h5>Animation Blueprints</h5>
+			<div class="about">
+				<div class="banner">
+					<img class="medium" src="images/AnimationBlueprint1.png">
+					<p class="imagetext">
+						Statemachine belonging to Player 1
+					</p>
+				</div>
+				<div class="hiddendivider"></div>
+				<p class="desc">
+					I was given the responsiblity of implementing the animations into the game. To this end, I created animation blueprints and state machines in order make it work.<br>
+					All states are connected to their own booelans and calculations, and most of them should smoothly transition between the different available states.<br>
+					<br>					
+					I set up the walking animations using BlendSpaces, to smoothly transition between walking and running, although the values need to be tweaked after the movement speed of the characters were reworked.
+					I also needed to create new animation through the use of ones we got from Mixamo in addition to the ones we created using motion capture. The reason for this was that some of the animations just didn't look good
+					within in game, and since we didn't have a dedicated animator, I resorted to cutting apart animations in order to create better transitions.<br>
+					The jump was originally one animation with both jumping and landing, which I cut out most parts off, in order to create a short jump and landing animation that worked with the speed of the characters.<br>
+					Lifting and Throwing also works through the usage of the Blend by Bone node, which combines the motion captured lift and throw animations with the walking animation from Mixamo.<br>
+					<br>
+				</p>
+			</div>
+			<div class="divider"></div>
+			<h5>Other things</h5>
+			<div class="about">
+				<div class="banner">
+					<img class="medium" src="images/FallingTree.png">
+					<p class="imagetext">
+						Pushable log
 					</p>
 				</div>
 				<div class="banner">
-					<img class="big" src="images/physics.png">
-					<p class="display">
-
+					<img class="medium" src="images/BalanceLog.png">
+					<p class="imagetext">
+						Balance log
 					</p>
 				</div>
+				<div class="hiddendivider"></div>
+				<p class="desc">
+					I've also created or done a lot of smaller things within the game that I don't think require their own section, which is why I will just go over them here.<br>
+					<br>
+					
+					<b>Pushable Ice Block</b>: The ice blocks that exist within the level that are capable of being pushed. They contain logic for checking if they're currently in the air.<br>
+					<br>
+					
+					<b>Pushable Log</b>: The logs that can be pushed over. They are controlled using a PhysicsContraint in order to keep them aligned with their intended path while maintaining the smooth physicsbased movement.
+					They contain logic for seeing if it is currently falling, and also a method to check if its rotation has changed between ticks.<br>
+					<br>
+					
+					<b>Balance Log</b>: A log on top of a rock kept in place through the use of a PhysicsConstraint. It uses the angular motor of the constraint to reset itself to avoid blocking progression.<br>
+					<br>
+					
+					<b>Music System</b>: A system for easily changing Music between levels through the use of triggers, and a manager that fades in and out the tracks. Also manages the music that plays when a player is dancing.<br>
+					<br>
+					
+					<b>Interaction System</b>: Wasn't implemented at the time of the video being recorded, but I added a few more functions to the interface that manages the popups to lower the amount of functions called at once from the same button.
+					Pushing now uses the X button together with the hug and climb, and the methods are only called if facing the object the mechanic can be used on.<br>
+					<br>
+					
+					<b>Debugging</b>: Several small changes within other members code. Includes fixing if statements to prevent triggering multiple actions at once, preventing crashes and optimization.
+					
+				</p>
 			</div>
-			
+			<div class="divider"></div>
 		</div>
 			
 		</div>
